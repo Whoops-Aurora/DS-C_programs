@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct DOCTOR
+{
+    /*
+    char name[20];
+    int age;
+    float sal;
+    char spl[10];
+    */
+    int n;
+    struct DOCTOR *next;
+} NODE;
+#define newnode() (NODE*)malloc(sizeof(NODE))
+main()
+{
+    NODE *h,*p;
+    create(&h);
+    insert(&h);
+    return 0;
+}
+/* Teachers code
+NODE insert_pos(int pos , NODE first)
+{
+
+}
+*/
+//Creating a node
+void create(NODE **h)
+{
+    NODE *p;
+    int ch;
+    p=*h;
+    printf("p=%d",p);
+    p->next=newnode();
+    do
+    {
+        printf("Enter the integer:");
+        scanf("%d",&p->n);
+        printf("Continue (1/0):");
+        scanf("%d",&ch);
+        if(ch==1)
+        {
+            p->next=newnode();
+            p=p->next;
+        }
+        else
+        {
+            p->next=NULL;
+            break;
+        }
+    }while(1);
+    printf("List created...\n");
+    p=*h;
+    while(p!=NULL)
+    {
+        printf("%d\t",p->n);
+        p=p->next;
+    }
+}
+void insert(NODE *h)
+{
+    NODE *p,*q;
+    int posi,replace,count=0;
+    p=h;
+    printf("Enter position to add to");
+    scanf("%d",&posi);
+    while(p!=NULL)
+    {
+        count++;
+        if(count==posi)
+        {
+            printf("Enter int to insert here...:");
+            scanf("%d",&replace);
+            q=p;
+            p->next=newnode();
+            p=p->next;
+            p->n=replace;
+            q->next=p->next;
+            break;
+        }
+        p=p->next;
+    }
+    p=h;
+     while(p!=NULL)
+    {
+        printf("%d\t",p->n);
+        p=p->next;
+    }
+}
+void deletion(NODE *h)
+{
+    int s;
+    NODE t,*p;
+    printf("Enter number to delete");
+    scanf("%d",&s);
+    p=h;
+    while(p->next!=NULL)
+    {
+        if(p->next->n==s)
+        {
+            t=p->next;
+            free(t);
+            break;
+        }
+        p=p->next;
+    }
+}
